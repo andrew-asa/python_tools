@@ -1,4 +1,6 @@
 import argparse
+import tempfile
+
 from paddleocr import PPStructure, draw_structure_result, save_structure_res, PaddleOCR, draw_ocr
 import functools
 
@@ -107,8 +109,9 @@ class ImageOcr():
         """
         if (StringUtils.isEmpty(save_img_path)):
             fn = DateUtils.get_date_str("%Y-%m-%d-%H-%M-%S") + ".png"
-            save_img_path = FileNameUtils.join(self.default_clipboard_save_path, fn)
-        print("save img to %s", save_img_path)
+            tempdir = tempfile.gettempdir()
+            save_img_path = FileNameUtils.join(tempdir, fn)
+        print("save img to ",save_img_path)
         if (ClipboardUtils.copyImageTo(save_img_path)):
             self.img_ocr(img_path=save_img_path, print_in_console=True, copy_to_clipboard=copy_to_clipboard)
             if(delete_after_ocr):

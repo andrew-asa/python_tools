@@ -56,9 +56,8 @@ class TestMathFunc(unittest.TestCase):
         ]
         ret = self.ocr.scanOrderResult(result)
         self.assertEqual([['上', '下'], ['左', '右']],ret)
-    @unittest.skip
+    # @unittest.skip
     def test_ocr_clipboard_img(self):
-        self.ocr.set_default_clipboard_save_path("/Users/andrew_asa/temp/ocr/image")
         self.ocr.ocr_clipboard_img()
 
 

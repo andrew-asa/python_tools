@@ -111,11 +111,13 @@ class ImageOcr():
             fn = DateUtils.get_date_str("%Y-%m-%d-%H-%M-%S") + ".png"
             tempdir = tempfile.gettempdir()
             save_img_path = FileNameUtils.join(tempdir, fn)
-        print("save img to ",save_img_path)
         if (ClipboardUtils.copyImageTo(save_img_path)):
+            print("save img to ",save_img_path)
             self.img_ocr(img_path=save_img_path, print_in_console=True, copy_to_clipboard=copy_to_clipboard)
             if(delete_after_ocr):
                 IOUtils.deleteFile(save_img_path)
+        else:
+            print("粘贴板上没有图片")
 
 
 def parseArgument():

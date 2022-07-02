@@ -1,9 +1,10 @@
-# 坐标比较，左上 右下
-# 先比较y轴然后再比较x轴
 import functools
 
 
 class CompareUtils:
+    """
+    比较工具类
+    """
     def coordinateCompare(obj1, obj2):
         """
         坐标比较,左上，右下的位置比较

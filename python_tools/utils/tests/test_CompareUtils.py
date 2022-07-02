@@ -2,7 +2,7 @@ import unittest
 from python_tools.utils.CompareUtils import *
 
 
-class TestMathFunc(unittest.TestCase):
+class TestCompareUtils(unittest.TestCase):
 
     def test_coordinateCompare(self):
         obj1 = [0, 0]

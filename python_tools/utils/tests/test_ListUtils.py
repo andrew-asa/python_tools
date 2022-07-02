@@ -2,7 +2,7 @@ import unittest
 from python_tools.utils.ListUtils import *
 
 
-class TestMathFunc(unittest.TestCase):
+class TestListUtils(unittest.TestCase):
 
     def test_coordinateCompare(self):
         self.assertTrue(ListUtils.isEmptyList([]))

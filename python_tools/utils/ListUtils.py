@@ -1,14 +1,18 @@
 # join 二维列表
-EMPTY_LIST = []
 
 
 class ListUtils:
+    """
+    list 相关工具类
+    """
+    EMPTY_LIST = []
+
     def isEmptyList(list):
         """
         列表是否为空
         :return:
         """
-        return list == EMPTY_LIST
+        return list == ListUtils.EMPTY_LIST
 
     def isNoEmptyList(list):
         """

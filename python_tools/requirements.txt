@@ -1,0 +1,4 @@
+paddleocr
+unittest
+pyperclip
+pillow

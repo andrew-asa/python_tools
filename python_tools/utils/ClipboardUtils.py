@@ -28,6 +28,7 @@ class ClipboardUtils:
         im = ImageGrab.grabclipboard();
         if isinstance(im, Image.Image):
             im.save(dest)
+            return  True
         else:
             print("clipboard no contain img ")
-        return
+        return False

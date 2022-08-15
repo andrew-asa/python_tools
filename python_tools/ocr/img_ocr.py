@@ -78,6 +78,18 @@ class ImageOcr():
     def sortOcrResult(self, result):
         result.sort(key=functools.cmp_to_key(self.ocrPointCompare))
 
+    def ocrs(self, img_paths=[], sortResult=True):
+        """
+        多个图片ocr
+        :param img_paths:
+        :param sortResult:
+        :return:
+        """
+        ret = {}
+        for img in img_paths:
+            ret[img] = self.ocr(img, sortResult)
+        return ret
+
     def ocr(self, img_path, sortResult=True):
         """
         图片ocr

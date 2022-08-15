@@ -24,3 +24,11 @@ class StringUtils:
         :return:
         """
         return StringUtils.isNoEmpty(str) and str.endswith(endStr)
+
+    def equal(str1,str2):
+        """
+        字符串是否相等
+        :param str2:
+        :return:
+        """
+        return  str1 == str2

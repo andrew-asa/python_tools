@@ -2,3 +2,4 @@ paddleocr
 unittest
 pyperclip
 pillow
+whoosh

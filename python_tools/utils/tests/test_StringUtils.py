@@ -18,5 +18,12 @@ class TestStringUtils(unittest.TestCase):
         self.assertFalse(StringUtils.endswith("abc/c",'/'))
         self.assertFalse(StringUtils.endswith('',''))
 
+    def test_equal(self):
+        self.assertTrue(StringUtils.equal("a","a"))
+        self.assertTrue(StringUtils.equal("aabbdd","aabbdd"))
+        self.assertFalse(StringUtils.equal("a","b"))
+        self.assertFalse(StringUtils.equal("","b"))
+        self.assertFalse(StringUtils.equal(None,"b"))
+
 if __name__ == '__main__':
     unittest.main()

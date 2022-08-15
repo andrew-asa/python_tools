@@ -12,6 +12,11 @@ class TestStringUtils(unittest.TestCase):
         self.assertTrue(StringUtils.isNoEmpty("aaa"))
         self.assertFalse(StringUtils.isNoEmpty(""))
         self.assertFalse(StringUtils.isNoEmpty())
+    def test_endswith(self):
+        self.assertTrue(StringUtils.endswith("abc/e",'e'))
+        self.assertTrue(StringUtils.endswith("abc/",'/'))
+        self.assertFalse(StringUtils.endswith("abc/c",'/'))
+        self.assertFalse(StringUtils.endswith('',''))
 
 if __name__ == '__main__':
     unittest.main()

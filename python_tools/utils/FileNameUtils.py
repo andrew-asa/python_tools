@@ -13,3 +13,11 @@ class FileNameUtils:
         :return:
         """
         return os.path.join(basePath, *p)
+    def dirname(path):
+        """
+        返回路径中的目录部分
+        :return:
+        """
+        return os.path.dirname(path)
+    def base_name(path):
+        return os.path.basename(path)

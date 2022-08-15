@@ -2,6 +2,7 @@ class StringUtils:
     """
     字符串操作工具类
     """
+
     def isEmpty(str=""):
         """
         字符串判空
@@ -15,3 +16,11 @@ class StringUtils:
         :return:
         """
         return not StringUtils.isEmpty(str)
+
+    def endswith(str, endStr):
+        """
+        str是否以endStr结尾
+        :param endStr:
+        :return:
+        """
+        return StringUtils.isNoEmpty(str) and str.endswith(endStr)

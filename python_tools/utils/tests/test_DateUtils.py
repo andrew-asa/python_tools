@@ -8,6 +8,7 @@ class TestDateUtils(unittest.TestCase):
         print(DateUtils.getYY_MM_DD())
     def test_get_date_str(self):
         print(DateUtils.get_date_str("%Y-%m-%d-%H:%M:%S"))
+        print(DateUtils.get_date_str(DateUtils.yy_mm_dd_hh_mm_ss))
         print(DateUtils.get_date_str(DateUtils.yy_mm_dd))
 if __name__ == '__main__':
     unittest.main()

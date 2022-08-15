@@ -78,20 +78,33 @@ class ImageOcr():
     def sortOcrResult(self, result):
         result.sort(key=functools.cmp_to_key(self.ocrPointCompare))
 
-    def img_ocr(self, img_path, print_in_console=True, copy_to_clipboard=True):
+    def ocr(self, img_path, sortResult=True):
+        """
+        图片ocr
+        :param img_path:
+        :param sortResult: 如果为false则返回的是PaddleOcr的原始结果
+                           默认则返回整理过后的二维数组
+        :return:
+        """
+        ocr = PaddleOCR(use_angle_cls=True, use_gpu=False);
+        result = ocr.ocr(img_path, cls=True)
+        if (sortResult):
+            self.sortOcrResult(result)
+            return self.scanOrderResult(result)
+        return result
+
+    def img_ocr(self, img_path, print_in_console=True, copy_to_clipboard=True, colSequence=" ", rowSequence="\n"):
         """
         图片ocr识别
         :param img_path: 图片路径
         :param print_in_console: 是否在控制台打印识别信息
         :param copy_to_clipboard: 是否复制识别的文字到粘贴板
+        :param sequence: 列之间的间隔符
+        :param lineSequence: 行之间的间隔符
         :return:
         """
-        ocr = PaddleOCR(use_angle_cls=True, use_gpu=False);
-        result = ocr.ocr(img_path, cls=True);
-        # result.sort()
-        self.sortOcrResult(result)
-        ret = self.scanOrderResult(result)
-        content = ListUtils.joinTwoDimensionList(ret, " ")
+        ret = self.ocr(img_path)
+        content = ListUtils.joinTwoDimensionList(ret, colSequence, rowSequence)
         if (print_in_console):
             print("-- img ocr result --")
             print(content)
@@ -100,24 +113,39 @@ class ImageOcr():
             ClipboardUtils.copyToClipboard(content)
         return content
 
-    def ocr_clipboard_img(self, save_img_path="", copy_to_clipboard=True,delete_after_ocr = True):
+    def __create_temp_img_path(self):
+        fn = DateUtils.get_date_str("%Y-%m-%d-%H-%M-%S") + ".png"
+        tempdir = tempfile.gettempdir()
+        save_img_path = FileNameUtils.join(tempdir, fn)
+        return save_img_path
+
+    def ocr_clipboard_img(self, save_img_path="",
+                          print_in_console=True,
+                          copy_to_clipboard=True,
+                          delete_after_ocr=True,
+                          colSequence=" ",
+                          rowSequence="\n"):
         """
         ocr识别站粘贴板中的图片文字
         :param save_img_path:
         :param copy_to_clipboard:
         :return:
         """
+        content = ""
         if (StringUtils.isEmpty(save_img_path)):
-            fn = DateUtils.get_date_str("%Y-%m-%d-%H-%M-%S") + ".png"
-            tempdir = tempfile.gettempdir()
-            save_img_path = FileNameUtils.join(tempdir, fn)
+            save_img_path = self.__create_temp_img_path()
         if (ClipboardUtils.copyImageTo(save_img_path)):
-            print("save img to ",save_img_path)
-            self.img_ocr(img_path=save_img_path, print_in_console=True, copy_to_clipboard=copy_to_clipboard)
-            if(delete_after_ocr):
+            print("save img to ", save_img_path)
+            content = self.img_ocr(img_path=save_img_path,
+                                   print_in_console=print_in_console,
+                                   copy_to_clipboard=copy_to_clipboard,
+                                   colSequence=colSequence,
+                                   rowSequence=rowSequence)
+            if (delete_after_ocr):
                 IOUtils.deleteFile(save_img_path)
         else:
             print("粘贴板上没有图片")
+        return content
 
 
 def parseArgument():

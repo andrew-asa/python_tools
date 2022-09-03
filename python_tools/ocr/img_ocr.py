@@ -76,7 +76,19 @@ class ImageOcr():
         return 1
 
     def sortOcrResult(self, result):
+        """
+        ocr扫描坐标排序
+        :param result:
+        :return:
+        """
         result.sort(key=functools.cmp_to_key(self.ocrPointCompare))
+    def getLeftTopAndRightBottomRectangle(self,result):
+        """获取扫描结果矩形
+        """
+        self.sortOcrResult(result)
+        leftTop = result[0][0][0]
+        rightBottom = result[len(result)-1][0][2]
+        return [leftTop,rightBottom]
 
     def ocrs(self, img_paths=[], sortResult=True):
         """
